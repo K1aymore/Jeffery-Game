@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://8pf1yt2wqclc"]
+
+[ext_resource type="Texture2D" uid="uid://bt7k26bpn8t38" path="res://Levels/Bug Bar.png" id="1_4e0jo"]
+[ext_resource type="PackedScene" uid="uid://c0v60qoxlmjcd" path="res://Jeffery/Jeffery.tscn" id="1_shx0t"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ju0rj"]
+vertices = PackedVector2Array(242, 450, 326, 360, 978, 528, 888, 640)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(888, 640, 978, 528, 326, 360, 242, 450)])
+
+[node name="Game" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="BugBar" type="Sprite2D" parent="Level"]
+position = Vector2(639, 362)
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("1_4e0jo")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Level"]
+navigation_polygon = SubResource("NavigationPolygon_ju0rj")
+
+[node name="Jeffery" parent="." instance=ExtResource("1_shx0t")]
+position = Vector2(786, 596)

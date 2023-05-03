@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0v60qoxlmjcd"]
+
+[ext_resource type="Texture2D" uid="uid://bqa2cb7pj47aj" path="res://Jeffery/Jeffery.png" id="1_s4ttp"]
+[ext_resource type="Script" path="res://Jeffery/Jeffery.gd" id="1_t18hj"]
+
+[sub_resource type="Animation" id="Animation_p6n3u"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2, 2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.0333333, -0.0235619, -0.141372, -0.0333333, 0, 0.0333333, 0, 0, -0.0333333, -0.0234165, 0.0333333, 0.0234165, 0.139626, -0.0333333, 0, 0.0333333, 0, 0, -0.0333333, 0.0232711, 0, 0),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_l6bpo"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etsrd"]
+_data = {
+"RESET": SubResource("Animation_l6bpo"),
+"Walk": SubResource("Animation_p6n3u")
+}
+
+[node name="Jeffery" type="CharacterBody2D"]
+script = ExtResource("1_t18hj")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_s4ttp")
+offset = Vector2(0, -450)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_etsrd")
+}
