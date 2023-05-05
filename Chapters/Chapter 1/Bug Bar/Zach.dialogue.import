@@ -1,0 +1,14 @@
+[remap]
+
+importer="dialogue_manager_compiler_8"
+type="Resource"
+uid="uid://dufldt3d8en23"
+path="res://.godot/imported/Zach.dialogue-0f3a0ab2894afa4c24f7192b7fa08597.tres"
+
+[deps]
+
+source_file="res://Chapters/Chapter 1/Bug Bar/Zach.dialogue"
+dest_files=["res://.godot/imported/Zach.dialogue-0f3a0ab2894afa4c24f7192b7fa08597.tres"]
+
+[params]
+

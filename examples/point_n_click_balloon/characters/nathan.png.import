@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt7k26bpn8t38"
-path="res://.godot/imported/Bug Bar.png-452a728ab63f697c2020ae24b7746f94.ctex"
+uid="uid://c0l6o1et1dwqr"
+path="res://.godot/imported/nathan.png-71f1691cb467c4142939edd0f6812c0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/Bug Bar.png"
-dest_files=["res://.godot/imported/Bug Bar.png-452a728ab63f697c2020ae24b7746f94.ctex"]
+source_file="res://examples/point_n_click_balloon/characters/nathan.png"
+dest_files=["res://.godot/imported/nathan.png-71f1691cb467c4142939edd0f6812c0d.ctex"]
 
 [params]
 

@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 var movement_speed: float = 300.0
-var movement_target_position: Vector2 = Vector2(60.0,180.0)
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -12,15 +11,6 @@ func _ready():
 	navigation_agent.path_desired_distance = 4.0
 	navigation_agent.target_desired_distance = 4.0
 
-	# Make sure to not await during _ready.
-	call_deferred("actor_setup")
-
-func actor_setup():
-	# Wait for the first physics frame so the NavigationServer can sync.
-	await get_tree().physics_frame
-
-	# Now that the navigation map is no longer empty, set the movement target.
-	set_movement_target(movement_target_position)
 
 
 func set_movement_target(movement_target: Vector2):
@@ -28,9 +18,6 @@ func set_movement_target(movement_target: Vector2):
 
 
 func _physics_process(delta):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		set_movement_target(get_global_mouse_position())
-	
 	
 	if navigation_agent.is_navigation_finished():
 		$AnimationPlayer.play("RESET", 1)
@@ -51,5 +38,11 @@ func _physics_process(delta):
 	
 	$Sprite.flip_h = velocity.x < 0
 	
-	$Sprite.scale = Vector2.ONE * (position.y / 1000)
+	$Sprite.scale = Vector2.ONE * ((1000 + position.y) / 2000)
 	
+
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton && event.get_button_index() == MOUSE_BUTTON_LEFT && event.pressed:
+		
+		set_movement_target(get_global_mouse_position())
