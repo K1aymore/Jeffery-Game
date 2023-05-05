@@ -47,12 +47,13 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_s4ttp")
 offset = Vector2(0, -450)
 
+[node name="MouthPos" type="Node2D" parent="Sprite"]
+position = Vector2(36, -892)
+scale = Vector2(2, 2)
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_etsrd")
 }
-
-[node name="MouthPos" type="Node2D" parent="."]
-position = Vector2(21, -357)

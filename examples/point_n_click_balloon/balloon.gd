@@ -3,7 +3,7 @@ extends CanvasLayer
 class_name PointNClickBaloon
 
 const COLORS = {
-	"Jeffery": "ff5741",
+	"Jeffery": "4cdce2",
 	"Zach": "f5cfa2",
 	"Nathan": "ff5741",
 	"Coco": "f5cfa2"
@@ -38,7 +38,6 @@ var dialogue_line: DialogueLine:
 		$Background.hide()
 		# Remove any previous responses
 		for child in responses_menu.get_children():
-			responses_menu.remove_child(child)
 			child.queue_free()
 		
 		dialogue_line = next_dialogue_line
@@ -51,7 +50,7 @@ var dialogue_line: DialogueLine:
 		
 		# Set the colour and attach the dialogue to the character
 		dialogue_label.set("theme_override_colors/default_color", Color(COLORS[dialogue_line.character]))
-		dialogue_label.set("theme_override_colors/font_outline_color", Color(COLORS[dialogue_line.character]).darkened(0.4))
+		dialogue_label.set("theme_override_colors/font_outline_color", Color(COLORS[dialogue_line.character]).darkened(0.8))
 		target = get_tree().current_scene.find_child(dialogue_line.character, true).find_child("MouthPos")
 		dialogue_label.global_position = target.get_global_transform_with_canvas().origin - Vector2(dialogue_label.size.x * 0.5, dialogue_label.get_content_height())
 		
@@ -64,19 +63,7 @@ var dialogue_line: DialogueLine:
 		audio_stream_player.play()
 		
 		Events.emit_signal("character_started_talking", dialogue_line.character)
-		await audio_stream_player.finished
-		Events.emit_signal("character_finished_talking", dialogue_line.character)
-		dialogue_label.hide()
 		
-		if dialogue_line.responses.size() == 0:
-			next(dialogue_line.next_id)
-		else:
-			for response in dialogue_line.responses:
-				var item: RichTextLabel = response_template.duplicate(DUPLICATE_SCRIPTS | DUPLICATE_SIGNALS)
-				item.text = response.text
-				item.show()
-				responses_menu.add_child(item)
-			configure_menu()
 	get:
 		return dialogue_line
 
@@ -89,10 +76,14 @@ func _ready() -> void:
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
 
-func _unhandled_input(_event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
 	if isVisible():
 		get_viewport().set_input_as_handled()
+		if event is InputEventMouseButton && event.get_button_index() == MOUSE_BUTTON_LEFT && event.pressed && audio_stream_player.playing:
+			print("hi")
+			audio_stream_player.stop()
+			finishLine()
 
 
 ## Start some dialogue
@@ -106,6 +97,23 @@ func start(dialogue_resource: DialogueResource, title: String, extra_game_states
 ## Go to the next line
 func next(next_id: String) -> void:
 	self.dialogue_line = await resource.get_next_dialogue_line(next_id, temporary_game_states)
+
+
+func finishLine():
+	Events.emit_signal("character_finished_talking", dialogue_line.character)
+	dialogue_label.hide()
+	
+	if dialogue_line.responses.size() == 0:
+		next(dialogue_line.next_id)
+		for child in responses_menu.get_children():
+			child.queue_free()
+	else:
+		for response in dialogue_line.responses:
+			var item: RichTextLabel = response_template.duplicate(DUPLICATE_SCRIPTS | DUPLICATE_SIGNALS)
+			item.text = response.text
+			item.show()
+			responses_menu.add_child(item)
+		configure_menu()
 
 
 func isVisible() -> bool:
@@ -191,4 +199,4 @@ func _on_response_focus_exited(item):
 
 func _on_dialogue_label_resized() -> void:
 	if is_instance_valid(target):
-		dialogue_label.global_position = target.global_position - Vector2(dialogue_label.size.x * 0.5, dialogue_label.get_content_height())
+		dialogue_label.global_position = target.get_global_transform_with_canvas().origin - Vector2(dialogue_label.size.x * 0.5, dialogue_label.get_content_height())

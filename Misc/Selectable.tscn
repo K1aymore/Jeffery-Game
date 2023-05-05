@@ -10,6 +10,7 @@ script = ExtResource("1_uow42")
 metadata/_edit_group_ = true
 
 [node name="MouthPos" type="Node2D" parent="."]
+position = Vector2(0, -90.99)
 
 [node name="SpeechBox" type="RichTextLabel" parent="."]
 anchors_preset = 8

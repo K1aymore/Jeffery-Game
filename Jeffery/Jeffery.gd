@@ -4,6 +4,7 @@ extends CharacterBody2D
 var movement_speed: float = 300.0
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var mouthPos := $Sprite/MouthPos
 
 func _ready():
 	# These values need to be adjusted for the actor's speed
@@ -37,6 +38,8 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	$Sprite.flip_h = velocity.x < 0
+	
+	mouthPos.position.x = abs(mouthPos.position.x) * (-1 if $Sprite.flip_h else 1)
 	
 	$Sprite.scale = Vector2.ONE * ((1000 + position.y) / 2000)
 	
