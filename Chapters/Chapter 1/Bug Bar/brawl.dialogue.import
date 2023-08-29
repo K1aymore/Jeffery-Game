@@ -1,0 +1,14 @@
+[remap]
+
+importer="dialogue_manager_compiler_8"
+type="Resource"
+uid="uid://clyvv22c723vm"
+path="res://.godot/imported/brawl.dialogue-9a6fb7231336d2e58e810809386d3460.tres"
+
+[deps]
+
+source_file="res://Chapters/Chapter 1/Bug Bar/brawl.dialogue"
+dest_files=["res://.godot/imported/brawl.dialogue-9a6fb7231336d2e58e810809386d3460.tres"]
+
+[params]
+

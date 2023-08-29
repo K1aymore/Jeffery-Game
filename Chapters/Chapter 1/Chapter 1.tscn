@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://brcms3gormehe"]
+[gd_scene load_steps=7 format=3 uid="uid://brcms3gormehe"]
 
 [ext_resource type="PackedScene" uid="uid://2pjad7yqc6he" path="res://Chapters/Chapter.tscn" id="1_aflj1"]
 [ext_resource type="Texture2D" uid="uid://bt7k26bpn8t38" path="res://Chapters/Chapter 1/Bug Bar/Bug Bar.png" id="2_duaf6"]
 [ext_resource type="PackedScene" uid="uid://dtblpy4t75ucr" path="res://Misc/Selectable.tscn" id="3_p7e4o"]
 [ext_resource type="Resource" uid="uid://dufldt3d8en23" path="res://Chapters/Chapter 1/Bug Bar/Zach.dialogue" id="4_syuaj"]
+[ext_resource type="Resource" uid="uid://clyvv22c723vm" path="res://Chapters/Chapter 1/Bug Bar/brawl.dialogue" id="5_7yp1x"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1h616"]
 vertices = PackedVector2Array(-401, -164, -318, -255, 318, -94, 250, 19)
@@ -36,5 +37,9 @@ dialog = ExtResource("4_syuaj")
 
 [node name="SpeechBox" parent="BugBar/Zach" index="1"]
 offset_top = -158.0
+
+[node name="Brawl" parent="BugBar" index="4" instance=ExtResource("3_p7e4o")]
+position = Vector2(471, -446)
+dialog = ExtResource("5_7yp1x")
 
 [editable path="BugBar/Zach"]
