@@ -4,7 +4,6 @@ extends CharacterBody2D
 var movement_speed: float = 300.0
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var mouthPos := $Sprite/MouthPos
 
 func _ready():
 	# These values need to be adjusted for the actor's speed
@@ -15,6 +14,7 @@ func _ready():
 
 
 func set_movement_target(movement_target: Vector2):
+	print(movement_target)
 	navigation_agent.target_position = movement_target
 
 
@@ -25,7 +25,6 @@ func _physics_process(delta):
 		return
 	else:
 		$AnimationPlayer.play("Walk")
-		print(velocity)
 	
 	var current_agent_position: Vector2 = global_position
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
@@ -39,13 +38,10 @@ func _physics_process(delta):
 	
 	$Sprite.flip_h = velocity.x < 0
 	
-	mouthPos.position.x = abs(mouthPos.position.x) * (-1 if $Sprite.flip_h else 1)
-	
-	$Sprite.scale = Vector2.ONE * ((1000 + position.y) / 2000)
+	$Sprite.scale = Vector2.ONE * ((200 + position.y) / 2000)
 	
 
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.get_button_index() == MOUSE_BUTTON_LEFT && event.pressed:
-		
 		set_movement_target(get_global_mouse_position())

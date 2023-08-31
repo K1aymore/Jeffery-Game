@@ -1,26 +1,23 @@
 extends Node2D
 
-var baloonScene = preload("res://examples/point_n_click_balloon/balloon.tscn")
 
 @onready var mouse = $Mouse
-@onready var baloon: PointNClickBaloon
-@onready var hoverText: RichTextLabel = $UI/HoverText
+@onready var baloon
+@onready var hoverText: Label = $UI/HoverText
 
 var hoveredSelectable: Selectable
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	for node in get_tree().get_nodes_in_group("Selectable"):
+		if is_ancestor_of(node):
+			node.hovered.connect(_onSelectableHovered)
+			node.unhovered.connect(_onSelectableUnhovered)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	mouse.position = get_global_mouse_position()
-	
-	if !is_instance_valid(baloon) && hoveredSelectable != null:
-		hoverText.text = "[center]" + "Talk to Zach"
-	else:
-		hoverText.text = ""
+	$UI/HoverText.text = "Look at " + hoveredSelectable.name if hoveredSelectable != null else ""
 
 
 func _input(event):
@@ -40,17 +37,13 @@ func startDialog():
 	if is_instance_valid(baloon):
 		return
 	
-	baloon = baloonScene.instantiate()
-	add_child(baloon)
-	baloon.start(hoveredSelectable.dialog, hoveredSelectable.currentStart)
 	hoverText.text = ""
 
 
-func _on_mouse_area_entered(area):
-	if area is Selectable:
-		hoveredSelectable = area
 
+func _onSelectableHovered(area: Selectable):
+	print("hey")
+	hoveredSelectable = area
 
-func _on_mouse_area_exited(area):
-	if area is Selectable:
-		hoveredSelectable = null
+func _onSelectableUnhovered(area: Selectable):
+	hoveredSelectable = null

@@ -5,12 +5,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_j1u80"]
 radius = 84.0238
 
-[node name="Selectable" type="Area2D"]
+[node name="Selectable" type="Area2D" groups=["Selectable"]]
 script = ExtResource("1_uow42")
 metadata/_edit_group_ = true
-
-[node name="MouthPos" type="Node2D" parent="."]
-position = Vector2(0, -90.99)
 
 [node name="SpeechBox" type="RichTextLabel" parent="."]
 anchors_preset = 8
@@ -30,3 +27,6 @@ shortcut_keys_enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j1u80")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
