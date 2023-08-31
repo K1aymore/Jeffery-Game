@@ -10,16 +10,11 @@ func _ready():
 	# and the navigation layout.
 	navigation_agent.path_desired_distance = 4.0
 	navigation_agent.target_desired_distance = 4.0
+	$Sprite.scale = Vector2.ONE * ((200 + position.y) / 2000)
 
-
-
-func set_movement_target(movement_target: Vector2):
-	print(movement_target)
-	navigation_agent.target_position = movement_target
 
 
 func _physics_process(delta):
-	
 	if navigation_agent.is_navigation_finished():
 		$AnimationPlayer.play("RESET", 1)
 		return
@@ -37,11 +32,17 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	$Sprite.flip_h = velocity.x < 0
-	
 	$Sprite.scale = Vector2.ONE * ((200 + position.y) / 2000)
-	
+
+
+func set_movement_target(movement_target: Vector2):
+	navigation_agent.target_position = movement_target
 
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.get_button_index() == MOUSE_BUTTON_LEFT && event.pressed:
 		set_movement_target(get_global_mouse_position())
+
+
+func say(str: String):
+	$Label.text = str

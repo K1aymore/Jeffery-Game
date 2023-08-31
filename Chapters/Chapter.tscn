@@ -54,13 +54,13 @@ metadata/_edit_lock_ = true
 navigation_polygon = SubResource("NavigationPolygon_2ujs2")
 metadata/_edit_lock_ = true
 
-[node name="Zack" parent="BugBar" instance=ExtResource("4_qn1ev")]
+[node name="Zach" parent="BugBar" instance=ExtResource("4_qn1ev")]
 position = Vector2(818, 342)
 hoverText = "Talk to Zach"
 dialog = ExtResource("5_lb3wj")
 
-[node name="CollisionShape2D" parent="BugBar/Zack" index="1"]
+[node name="CollisionShape2D" parent="BugBar/Zach" index="1"]
 position = Vector2(17, 36)
 shape = SubResource("RectangleShape2D_jv7ag")
 
-[editable path="BugBar/Zack"]
+[editable path="BugBar/Zach"]
