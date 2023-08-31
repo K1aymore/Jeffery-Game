@@ -1,0 +1,14 @@
+[remap]
+
+importer="clyde.dialogue"
+type="PackedDataContainer"
+uid="uid://deklqqm1r2chf"
+path="res://.godot/imported/Zach.bonnie-5e00f83f6bfcfe5f018475bb1fc92fb4.res"
+
+[deps]
+
+source_file="res://dialogues/Zach.bonnie"
+dest_files=["res://.godot/imported/Zach.bonnie-5e00f83f6bfcfe5f018475bb1fc92fb4.res"]
+
+[params]
+

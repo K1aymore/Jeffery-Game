@@ -3,9 +3,10 @@ extends Area2D
 class_name Selectable
 
 
-@export var lookIcon := preload("res://Klaymore profile.png")
+@export var hoverIcon := preload("res://Klaymore profile.png")
+@export var hoverText := "Use thing"
 
-@export var dialog : Resource
+@export var dialog: Resource
 
 signal hovered(node: Selectable)
 signal unhovered(node: Selectable)

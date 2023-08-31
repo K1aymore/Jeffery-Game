@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://2pjad7yqc6he"]
+[gd_scene load_steps=8 format=3 uid="uid://2pjad7yqc6he"]
 
 [ext_resource type="Script" path="res://Chapters/Chapter.gd" id="1_kieba"]
 [ext_resource type="Texture2D" uid="uid://bt7k26bpn8t38" path="res://Chapters/Chapter 1/Bug Bar/Bug Bar.png" id="3_ehdrw"]
 [ext_resource type="PackedScene" uid="uid://dtblpy4t75ucr" path="res://Misc/Selectable.tscn" id="4_qn1ev"]
 [ext_resource type="PackedScene" uid="uid://c0v60qoxlmjcd" path="res://Jeffery/Jeffery.tscn" id="5_h7iuv"]
+[ext_resource type="PackedDataContainer" uid="uid://deklqqm1r2chf" path="res://dialogues/Zach.bonnie" id="5_lb3wj"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2ujs2"]
 vertices = PackedVector2Array(719, 599, 849, 640, 800, 691, 719, 635, 981, 646, 1462, 803, 1325, 963, 979, 732, 492, 547, 607, 588, 598, 622, 364, 678, 609, 640, 860, 743)
@@ -19,6 +20,7 @@ script = ExtResource("1_kieba")
 [node name="Jeffery" parent="." instance=ExtResource("5_h7iuv")]
 z_index = 1
 position = Vector2(483, 638)
+motion_mode = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 127
@@ -54,6 +56,8 @@ metadata/_edit_lock_ = true
 
 [node name="Zack" parent="BugBar" instance=ExtResource("4_qn1ev")]
 position = Vector2(818, 342)
+hoverText = "Talk to Zach"
+dialog = ExtResource("5_lb3wj")
 
 [node name="CollisionShape2D" parent="BugBar/Zack" index="1"]
 position = Vector2(17, 36)

@@ -1,11 +1,11 @@
 extends Node2D
 
 
-@onready var mouse = $Mouse
-@onready var baloon
+
 @onready var hoverText: Label = $UI/HoverText
 
 var hoveredSelectable: Selectable
+var currentDialog: Bonnie
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,11 +13,6 @@ func _ready():
 		if is_ancestor_of(node):
 			node.hovered.connect(_onSelectableHovered)
 			node.unhovered.connect(_onSelectableUnhovered)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	$UI/HoverText.text = "Look at " + hoveredSelectable.name if hoveredSelectable != null else ""
 
 
 func _input(event):
@@ -29,21 +24,19 @@ func _input(event):
 			startDialog()
 
 
-func isInDialog() -> bool:
-	return baloon.isVisible()
-
 
 func startDialog():
-	if is_instance_valid(baloon):
-		return
-	
 	hoverText.text = ""
+	currentDialog = Bonnie.new()
+	currentDialog.load_dialogue(hoveredSelectable.dialog.resource_path)
+
 
 
 
 func _onSelectableHovered(area: Selectable):
-	print("hey")
 	hoveredSelectable = area
+	$UI/HoverText.text = "Look at " + hoveredSelectable.name
 
 func _onSelectableUnhovered(area: Selectable):
 	hoveredSelectable = null
+	$UI/HoverText.text = ""
